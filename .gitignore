@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.netlify/
+.vercel/
+.next/
+dist-ssr/
+*.local
+.DS_Store
+desktop.ini
+Thumbs.db
+*.zip

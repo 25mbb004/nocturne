@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOCTURNE — Abyssal Bloom</title>
+<meta name="description" content="Carry light into the abyss. Wake the sleeping reef. A bioluminescent mini-game built with Three.js, custom GLSL and procedural audio.">
+<meta property="og:title" content="NOCTURNE — Abyssal Bloom">
+<meta property="og:description" content="Carry light into the abyss. Wake the sleeping reef.">
+<meta name="theme-color" content="#03080f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0%25' stop-color='%23bafff2'/%3E%3Cstop offset='45%25' stop-color='%2355e8cf'/%3E%3Cstop offset='100%25' stop-color='%2303080f'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='64' height='64' fill='%2303080f'/%3E%3Ccircle cx='32' cy='32' r='26' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,400;1,500&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="scene" aria-label="Nocturne game scene"></canvas>
+
+<!-- ambient page treatments -->
+<div class="vignette" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="hitflash" aria-hidden="true"></div>
+
+<!-- HUD -->
+<header id="hud" class="hidden">
+  <div class="hud-top">
+    <div class="wordmark">NOCTURNE</div>
+    <div class="hud-actions">
+      <button id="soundToggle" class="icon-btn" aria-label="Toggle sound" title="Toggle sound">
+        <svg id="soundOnIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+        <svg id="soundOffIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="display:none"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l5 5M22 9l-5 5"/></svg>
+      </button>
+      <a class="guide-link" href="guide/">GUIDE</a>
+    </div>
+  </div>
+  <div class="hud-bottom">
+    <div class="lumens">
+      <span id="lumenCount">0</span>
+      <span class="lumen-label">LUMENS</span>
+    </div>
+    <div class="reef-progress">
+      <div id="reefDots" class="reef-dots"></div>
+      <div class="reef-label">REEF <span id="reefCount">0</span> / 7</div>
+    </div>
+  </div>
+  <div id="hint" class="hint"></div>
+</header>
+
+<!-- TITLE SCREEN -->
+<section id="titleScreen">
+  <div class="title-inner">
+    <div class="overline reveal">AN ABYSSAL BLOOM</div>
+    <h1 id="titleWord" class="title-word">Nocturne</h1>
+    <div class="ornament reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+    <p class="tagline reveal">Carry light into the abyss.<br>Wake the sleeping reef.</p>
+    <div class="controls-hint reveal">
+      <span>DRIFT&nbsp;·&nbsp;<em>cursor</em></span>
+      <span>GATHER&nbsp;·&nbsp;<em>touch the motes</em></span>
+      <span>BLOOM&nbsp;·&nbsp;<em>bring 12 lumens to dark coral</em></span>
+    </div>
+    <button id="startBtn" class="descend-btn reveal">DESCEND</button>
+    <a class="making-of reveal" href="guide/">how this was made&nbsp;→</a>
+  </div>
+</section>
+
+<!-- WIN SCREEN -->
+<section id="winScreen" class="hidden">
+  <div class="title-inner">
+    <div class="overline">THE ABYSS, LIT</div>
+    <h2 class="win-word">The reef remembers light.</h2>
+    <div class="ornament"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+    <div class="stats">
+      <div class="stat"><span id="statTime">—</span><label>DESCENT</label></div>
+      <div class="stat"><span id="statMotes">—</span><label>MOTES GATHERED</label></div>
+      <div class="stat"><span id="statHits">—</span><label>URCHIN STINGS</label></div>
+    </div>
+    <button id="againBtn" class="descend-btn">BLOOM AGAIN</button>
+    <a class="making-of" href="guide/">how this was made&nbsp;→</a>
+  </div>
+</section>
+
+<div id="webglFail" class="hidden">
+  <p>Nocturne needs WebGL to bloom.<br>Please try a modern browser.</p>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
